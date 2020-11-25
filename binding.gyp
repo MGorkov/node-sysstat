@@ -1,11 +1,11 @@
 {
   "targets": [
     {
-      "target_name": "threads_prof",
+      "target_name": "node_sysstat",
       "cflags!": [ "-fno-exceptions" ],
       "cflags_cc!": [ "-fno-exceptions" ],
       "sources": [
-        "src/threads_prof.cc",
+        "src/node_sysstat.cc",
         "src/cpuload.cc",
         "src/utils.cc"
       ],

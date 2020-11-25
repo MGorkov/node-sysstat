@@ -1,7 +1,7 @@
 {
-  "name": "threads_prof",
+  "name": "node_sysstat",
   "version": "0.0.1",
-  "description": "Threads profiling",
+  "description": "Node system statistic",
   "main": "index.js",
   "dependencies": {
     "bindings": "^1.5.0",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://git.sbis.ru/explain.sbis.ru/threads-prof.git"
+    "url": "git+https://git.sbis.ru/explain.sbis.ru/node-sysstat.git"
   },
   "gypfile": true
 }
