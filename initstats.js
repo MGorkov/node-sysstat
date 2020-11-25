@@ -1,0 +1,32 @@
+const initStats = {
+  processCpuLoad: 0.0,
+  threadCpuLoad: 0.0,
+  latency_p99: 0,
+  rss: 0,
+  heapTotal: 0,
+  heapUsed: 0,
+  external: 0,
+  arrayBuffers: 0,
+  large_object_space_used: 0,
+  large_object_space_total: 0,
+  old_space_used: 0,
+  old_space_total: 0,
+  new_space_used: 0,
+  new_space_total: 0,
+  code_space_used: 0,
+  code_space_total: 0,
+  map_space_used: 0,
+  map_space_total: 0,
+  Scavenge_count: 0,
+  Scavenge_time: 0,
+  MarkSweepCompact_count: 0,
+  MarkSweepCompact_time: 0,
+  IncrementalMarking_count: 0,
+  IncrementalMarking_time: 0,
+  ProcessWeakCallbacks_count: 0,
+  ProcessWeakCallbacks_time: 0,
+};
+
+module.exports = {
+  initStats,
+};
