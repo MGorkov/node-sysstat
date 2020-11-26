@@ -66,7 +66,13 @@ class Stats extends EventEmitter {
   }
 
   getStats() {
-    Object.assign(this.stats, process.memoryUsage(),
+    const memoryUsage = process.memoryUsage();
+    this.stats['mem.rss'] = memoryUsage.rss;
+    this.stats['mem.heapTotal'] = memoryUsage.heapTotal;
+    this.stats['mem.heapUsed'] = memoryUsage.heapUsed;
+    this.stats['mem.external'] = memoryUsage.external;
+    this.stats['mem.arrayBuffers'] = memoryUsage.arrayBuffers;
+    Object.assign(this.stats,
       v8.getHeapSpaceStatistics().reduce((rv, space) => {
         switch (space.space_name) {
           case 'large_object_space':
