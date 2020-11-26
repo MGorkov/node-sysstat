@@ -5,7 +5,7 @@ const STATS_INTERVAL = 5 * 1000;
 const RESOLUTION = 10;
 
 const { CpuLoad } = require('bindings')('node_sysstat');
-const { initStats } = require('./initstats');
+const { initStats, statKeys } = require('./initstats');
 
 class Stats extends EventEmitter {
   constructor(options) {
@@ -105,6 +105,10 @@ class Stats extends EventEmitter {
 
   resetStats() {
     Object.assign(this.stats, initStats);
+  }
+
+  static statKeys() {
+    return statKeys;
   }
 
 }

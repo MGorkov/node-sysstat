@@ -1,32 +1,38 @@
-const initStats = {
-  'cpu.usage.process': 0.0,
-  'cpu.usage.thread': 0.0,
-  'latency.p99': 0,
-  'mem.rss': 0,
-  'mem.heapTotal': 0,
-  'mem.heapUsed': 0,
-  'mem.external': 0,
-  'mem.arrayBuffers': 0,
-  'mem.heap.large_object_space.used': 0,
-  'mem.heap.large_object_space.total': 0,
-  'mem.heap.old_space.used': 0,
-  'mem.heap.old_space.total': 0,
-  'mem.heap.new_space.used': 0,
-  'mem.heap.new_space.total': 0,
-  'mem.heap.code_space.used': 0,
-  'mem.heap.code_space.total': 0,
-  'mem.heap.map_space.used': 0,
-  'mem.heap.map_space.total': 0,
-  'gc.Scavenge.count': 0,
-  'gc.Scavenge.time': 0,
-  'gc.MarkSweepCompact.count': 0,
-  'gc.MarkSweepCompact.time': 0,
-  'gc.IncrementalMarking.count': 0,
-  'gc.IncrementalMarking.time': 0,
-  'gc.ProcessWeakCallbacks.count': 0,
-  'gc.ProcessWeakCallbacks.time': 0,
-};
+const statKeys = [
+  'cpu.usage.process',
+  'cpu.usage.thread',
+  'latency.p99',
+  'mem.rss',
+  'mem.heapTotal',
+  'mem.heapUsed',
+  'mem.external',
+  'mem.arrayBuffers',
+  'mem.heap.large_object_space.used',
+  'mem.heap.large_object_space.total',
+  'mem.heap.old_space.used',
+  'mem.heap.old_space.total',
+  'mem.heap.new_space.used',
+  'mem.heap.new_space.total',
+  'mem.heap.code_space.used',
+  'mem.heap.code_space.total',
+  'mem.heap.map_space.used',
+  'mem.heap.map_space.total',
+  'gc.Scavenge.count',
+  'gc.Scavenge.time',
+  'gc.MarkSweepCompact.count',
+  'gc.MarkSweepCompact.time',
+  'gc.IncrementalMarking.count',
+  'gc.IncrementalMarking.time',
+  'gc.ProcessWeakCallbacks.count',
+  'gc.ProcessWeakCallbacks.time'
+];
+
+const initStats = statKeys.reduce((rv, key) => {
+  rv[key] = 0;
+  return rv;
+}, {});
 
 module.exports = {
+  statKeys,
   initStats,
 };
