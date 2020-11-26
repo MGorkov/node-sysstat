@@ -1,4 +1,5 @@
-const Stats = require('./');
+const Sysstat = require('./');
+const STAT_INTERVAL = 5 * 1000;
 
 const {
   Worker,
@@ -12,8 +13,8 @@ if (isMainThread) {
 
   console.log(`Started main thread pid=${process.pid}`);
 
-  const stats = new Stats();
-  stats.on('stats', (stats) => {
+  const sysstat = new Sysstat({interval: STAT_INTERVAL});
+  sysstat.on('stats', (stats) => {
     console.log(`Main thread statistics: ${JSON.stringify(stats)}`);
   });
 
@@ -35,8 +36,8 @@ if (isMainThread) {
   }
 } else {
 
-  const stats = new Stats();
-  stats.on('stats', (stats) => {
+  const sysstat = new Sysstat({interval: STAT_INTERVAL});
+  sysstat.on('stats', (stats) => {
     parentPort.postMessage(stats);
   });
 

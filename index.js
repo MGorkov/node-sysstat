@@ -48,18 +48,21 @@ class Stats extends EventEmitter {
   }
 
   start() {
+    if (this.running) return;
     this.histogram.enable();
     this.resetStats();
     this.gcObserver.observe({entryTypes: ['gc'], buffered: true});
     this.statsInterval = setInterval(() => {
       this.emit('stats', this.getStats());
-    }, this.options.interval)
+    }, this.options.interval);
+    this.running = true;
   }
 
   stop() {
     this.histogram.disable();
     this.gcObserver.disconnect();
     clearInterval(this.statsInterval);
+    this.running = false;
   }
 
   getStats() {
