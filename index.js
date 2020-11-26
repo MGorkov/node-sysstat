@@ -27,20 +27,20 @@ class Stats extends EventEmitter {
         .map(({kind, duration}) => {
           switch (kind) {
             case constants.NODE_PERFORMANCE_GC_MINOR:
-              this.stats.Scavenge_count++;
-              this.stats.Scavenge_time += duration;
+              this.stats['gc.Scavenge.count']++;
+              this.stats['gc.Scavenge.time'] += duration;
               break;
             case constants.NODE_PERFORMANCE_GC_MAJOR:
-              this.stats.MarkSweepCompact_count++;
-              this.stats.MarkSweepCompact_time += duration;
+              this.stats['gc.MarkSweepCompact.count']++;
+              this.stats['gc.MarkSweepCompact.time'] += duration;
               break;
             case constants.NODE_PERFORMANCE_GC_INCREMENTAL:
-              this.stats.IncrementalMarking_count++;
-              this.stats.IncrementalMarking_time += duration;
+              this.stats['gc.IncrementalMarking.count']++;
+              this.stats['gc.IncrementalMarking.time'] += duration;
               break;
             case constants.NODE_PERFORMANCE_GC_WEAKCB:
-              this.stats.ProcessWeakCallbacks_count++;
-              this.stats.ProcessWeakCallbacks_time += duration;
+              this.stats['gc.ProcessWeakCallbacks.count']++;
+              this.stats['gc.ProcessWeakCallbacks.time'] += duration;
               break;
           }
         })
@@ -67,32 +67,32 @@ class Stats extends EventEmitter {
       v8.getHeapSpaceStatistics().reduce((rv, space) => {
         switch (space.space_name) {
           case 'large_object_space':
-            rv['large_object_space_total'] = space.space_size;
-            rv['large_object_space_used'] = space.space_used_size;
+            rv['mem.heap.large_object_space.total'] = space.space_size;
+            rv['mem.heap.large_object_space.used'] = space.space_used_size;
             break;
           case 'old_space':
-            rv['old_space_total'] = space.space_size;
-            rv['old_space_used'] = space.space_used_size;
+            rv['mem.heap.old_space.total'] = space.space_size;
+            rv['mem.heap.old_space.used'] = space.space_used_size;
             break;
           case 'new_space':
-            rv['new_space_total'] = space.space_size;
-            rv['new_space_used'] = space.space_used_size;
+            rv['mem.heap.new_space.total'] = space.space_size;
+            rv['mem.heap.new_space.total'] = space.space_used_size;
             break;
           case 'code_space':
-            rv['code_space_total'] = space.space_size;
-            rv['code_space_used'] = space.space_used_size;
+            rv['mem.heap.code_space.total'] = space.space_size;
+            rv['mem.heap.code_space.used'] = space.space_used_size;
             break;
           case 'map_space':
-            rv['map_space_total'] = space.space_size;
-            rv['map_space_used'] = space.space_used_size;
+            rv['mem.heap.map_space.total'] = space.space_size;
+            rv['mem.heap.map_space.used'] = space.space_used_size;
             break;
         }
         return rv;
       }, {})
     );
-    this.stats.processCpuLoad = this.cpuLoad.getProcessCpuLoad().toFixed(2);
-    this.stats.threadCpuLoad = this.cpuLoad.getThreadCpuLoad().toFixed(2);
-    this.stats.latency_p99 = this.histogram.percentile(99)/1000000 - this.options.resolution;
+    this.stats['cpu.usage.process'] = this.cpuLoad.getProcessCpuLoad().toFixed(2);
+    this.stats['cpu.usage.process'] = this.cpuLoad.getThreadCpuLoad().toFixed(2);
+    this.stats['latency.p99'] = this.histogram.percentile(99)/1000000 - this.options.resolution;
 
     let reportStats = Object.assign({}, this.stats);
     this.resetStats();
