@@ -100,7 +100,7 @@ class Stats extends EventEmitter {
       }, {})
     );
     this.stats['cpu.usage.process'] = this.cpuLoad.getProcessCpuLoad().toFixed(2);
-    this.stats['cpu.usage.process'] = this.cpuLoad.getThreadCpuLoad().toFixed(2);
+    this.stats['cpu.usage.thread'] = this.cpuLoad.getThreadCpuLoad().toFixed(2);
     this.stats['latency.p99'] = this.histogram.percentile(99)/1000000 - this.options.resolution;
 
     let reportStats = Object.assign({}, this.stats);
