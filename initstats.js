@@ -24,7 +24,8 @@ const statKeys = [
   'gc.IncrementalMarking.count',
   'gc.IncrementalMarking.time',
   'gc.ProcessWeakCallbacks.count',
-  'gc.ProcessWeakCallbacks.time'
+  'gc.ProcessWeakCallbacks.time',
+  'gc.time'
 ];
 
 const initStats = statKeys.reduce((rv, key) => {

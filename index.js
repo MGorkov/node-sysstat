@@ -25,6 +25,7 @@ class Stats extends EventEmitter {
       list
         .getEntries()
         .map(({kind, duration}) => {
+          this.stats['gc.time'] += duration;
           switch (kind) {
             case constants.NODE_PERFORMANCE_GC_MINOR:
               this.stats['gc.Scavenge.count']++;
