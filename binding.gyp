@@ -1,11 +1,11 @@
 {
   "targets": [
     {
-      "target_name": "node_sysstat",
+      "target_name": "sysstat",
       "cflags!": [ "-fno-exceptions" ],
       "cflags_cc!": [ "-fno-exceptions" ],
       "sources": [
-        "src/node_sysstat.cc",
+        "src/sysstat.cc",
         "src/cpuload.cc",
         "src/utils.cc"
       ],

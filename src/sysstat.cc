@@ -5,4 +5,4 @@ Napi::Object InitAll(Napi::Env env, Napi::Object exports) {
   return CpuLoad::Init(env, exports);
 }
 
-NODE_API_MODULE(threads_prof, InitAll)
+NODE_API_MODULE(sysstat, InitAll)

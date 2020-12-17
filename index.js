@@ -4,7 +4,7 @@ const { monitorEventLoopDelay, PerformanceObserver, constants } = require('perf_
 const STATS_INTERVAL = 5;
 const RESOLUTION = 10;
 
-const { CpuLoad } = require('bindings')('node_sysstat');
+const { CpuLoad } = require('bindings')('sysstat');
 const { initStats, statKeys, gcStatKeys } = require('./initstats');
 
 class Stats extends EventEmitter {

@@ -1,5 +1,5 @@
 {
-  "name": "node_sysstat",
+  "name": "node-sysstat",
   "version": "0.0.1",
   "description": "Node system statistic",
   "main": "index.js",

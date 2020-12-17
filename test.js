@@ -1,5 +1,5 @@
 const Sysstat = require('./');
-const STAT_INTERVAL = 5 * 1000;
+const STAT_INTERVAL = 5;
 
 const {
   Worker,
