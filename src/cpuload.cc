@@ -17,7 +17,6 @@ Napi::Object CpuLoad::Init(Napi::Env env, Napi::Object exports) {
 }
 
 CpuLoad::CpuLoad(const Napi::CallbackInfo& info) : Napi::ObjectWrap<CpuLoad>(info) {
-  Napi::Env env = info.Env();
 
   this->process_hrtime = get_hrtime();
   this->thread_hrtime = get_hrtime();
@@ -35,7 +34,7 @@ Napi::Value CpuLoad::getThreadCpuLoad(const Napi::CallbackInfo& info) {
   double diff_hrtime = hrtime - this->thread_hrtime;
   this->thread_hrtime = hrtime;
 
-  double cpu_usage = 100 * 1000 * diff_cputime / diff_hrtime;
+  double cpu_usage = 100000 * diff_cputime / diff_hrtime;
 
   return Napi::Number::New(info.Env(), cpu_usage);
 }
@@ -50,7 +49,7 @@ Napi::Value CpuLoad::getProcessCpuLoad(const Napi::CallbackInfo& info) {
   double diff_hrtime = hrtime - this->process_hrtime;
   this->process_hrtime = hrtime;
 
-  double cpu_usage = 100 * 1000 * diff_cputime / diff_hrtime;
+  double cpu_usage = 100000 * diff_cputime / diff_hrtime;
 
   return Napi::Number::New(info.Env(), cpu_usage);
 }
