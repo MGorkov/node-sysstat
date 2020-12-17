@@ -1,11 +1,11 @@
 const EventEmitter = require('events').EventEmitter;
 const v8 = require('v8');
 const { monitorEventLoopDelay, PerformanceObserver, constants } = require('perf_hooks');
-const STATS_INTERVAL = 5 * 1000;
+const STATS_INTERVAL = 5;
 const RESOLUTION = 10;
 
 const { CpuLoad } = require('bindings')('node_sysstat');
-const { initStats, statKeys } = require('./initstats');
+const { initStats, statKeys, gcStatKeys } = require('./initstats');
 
 class Stats extends EventEmitter {
   constructor(options) {
@@ -55,7 +55,7 @@ class Stats extends EventEmitter {
     this.gcObserver.observe({entryTypes: ['gc'], buffered: true});
     this.statsInterval = setInterval(() => {
       this.emit('stats', this.getStats());
-    }, this.options.interval);
+    }, this.options.interval * 1000);
     this.running = true;
   }
 
@@ -107,6 +107,10 @@ class Stats extends EventEmitter {
     this.stats['latency.max'] = this.histogram.max/1000000 - this.options.resolution;
     this.stats['latency.min'] = this.histogram.min/1000000 > this.options.resolution ? this.histogram.min/1000000 - this.options.resolution : 0;
     this.histogram.reset();
+
+    gcStatKeys.forEach((key) => {
+      this.stats[key] /= this.options.interval;
+    });
 
     let reportStats = Object.assign({}, this.stats);
     this.resetStats();

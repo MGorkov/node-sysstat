@@ -1,3 +1,15 @@
+const gcStatKeys = [
+  'gc.Scavenge.count',
+  'gc.Scavenge.time',
+  'gc.MarkSweepCompact.count',
+  'gc.MarkSweepCompact.time',
+  'gc.IncrementalMarking.count',
+  'gc.IncrementalMarking.time',
+  'gc.ProcessWeakCallbacks.count',
+  'gc.ProcessWeakCallbacks.time',
+  'gc.time'
+];
+
 const statKeys = [
   'cpu.usage.process',
   'cpu.usage.thread',
@@ -20,15 +32,7 @@ const statKeys = [
   'mem.heap.code_space.total',
   'mem.heap.map_space.used',
   'mem.heap.map_space.total',
-  'gc.Scavenge.count',
-  'gc.Scavenge.time',
-  'gc.MarkSweepCompact.count',
-  'gc.MarkSweepCompact.time',
-  'gc.IncrementalMarking.count',
-  'gc.IncrementalMarking.time',
-  'gc.ProcessWeakCallbacks.count',
-  'gc.ProcessWeakCallbacks.time',
-  'gc.time'
+  ...gcStatKeys
 ];
 
 const initStats = statKeys.reduce((rv, key) => {
@@ -39,4 +43,5 @@ const initStats = statKeys.reduce((rv, key) => {
 module.exports = {
   statKeys,
   initStats,
+  gcStatKeys,
 };
