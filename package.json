@@ -5,11 +5,15 @@
   "main": "index.js",
   "dependencies": {
     "bindings": "^1.5.0",
-    "node-addon-api": "^3.0.0"
+    "node-addon-api": "^3.0.0",
+    "node-gyp": "^6.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.1.1"
   },
   "scripts": {
     "install": "node-gyp rebuild",
-    "test": "node test.js",
+    "test": "mocha",
     "build": "node-gyp rebuild",
     "clean": "node-gyp clean"
   },
@@ -17,5 +21,15 @@
     "type": "git",
     "url": "git+https://git.sbis.ru/explain.sbis.ru/node-sysstat.git"
   },
+  "author": {
+    "name": "Maksim Gorkov",
+    "email": "mgorkov@gmail.com",
+    "url": "http://github.com/MGorkov"
+  },
+  "keywords": [
+    "nodejs",
+    "statistics"
+  ],
+  "homepage": "https://github.com/MGorkov/node-sysstat",
   "gypfile": true
 }
