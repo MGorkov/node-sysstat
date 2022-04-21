@@ -5,8 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "bindings": "^1.5.0",
-    "node-addon-api": "^3.0.0",
-    "node-gyp": "^6.1.0"
+    "node-addon-api": "^4.3.0",
+    "node-gyp": "^8.4.1"
   },
   "devDependencies": {
     "mocha": "^5.1.1"
