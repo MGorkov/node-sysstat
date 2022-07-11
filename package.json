@@ -17,6 +17,13 @@
     "build": "node-gyp rebuild",
     "clean": "node-gyp clean"
   },
+  "files": [
+    "/src",
+    "index.js",
+    "initstats.js",
+    "binding.gyp",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://git.sbis.ru/explain.sbis.ru/node-sysstat.git"
