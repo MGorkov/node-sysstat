@@ -4,7 +4,6 @@
   "description": "Node system statistic",
   "main": "index.js",
   "dependencies": {
-    "bindings": "^1.5.0",
     "node-addon-api": "^4.3.0",
     "node-gyp": "^8.4.1"
   },
