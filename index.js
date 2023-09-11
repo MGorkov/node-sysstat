@@ -24,7 +24,7 @@ class Stats extends EventEmitter {
     this.gcObserver = new PerformanceObserver((list) => {
       list
         .getEntries()
-        .map(({kind, duration}) => {
+        .map(({detail: {kind}, duration}) => {
           this.stats['gc.time'] += duration;
           switch (kind) {
             case constants.NODE_PERFORMANCE_GC_MINOR:
