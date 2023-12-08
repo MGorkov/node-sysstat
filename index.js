@@ -86,7 +86,7 @@ class Stats extends EventEmitter {
             break;
           case 'new_space':
             rv['mem.heap.new_space.total'] = space.space_size;
-            rv['mem.heap.new_space.total'] = space.space_used_size;
+            rv['mem.heap.new_space.used'] = space.space_used_size;
             break;
           case 'code_space':
             rv['mem.heap.code_space.total'] = space.space_size;
