@@ -1,11 +1,11 @@
 {
   "name": "node-sysstat",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Node system statistic",
   "main": "index.js",
   "dependencies": {
-    "node-addon-api": "^4.3.0",
-    "node-gyp": "^8.4.1"
+    "node-addon-api": "^8.0.0",
+    "node-gyp": "^10.1.0"
   },
   "devDependencies": {
     "mocha": "^5.1.1"
@@ -21,7 +21,8 @@
     "index.js",
     "initstats.js",
     "binding.gyp",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
