@@ -15,6 +15,7 @@
     "test": "node test"
   },
   "files": [
+    "/prebuilds",
     "/src",
     "index.js",
     "initstats.js",
