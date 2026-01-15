@@ -3,7 +3,7 @@ name: Prebuild
 on:
   push:
     branches:
-      - test
+      - '**'
   pull_request:
 
 jobs:
