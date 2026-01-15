@@ -5,6 +5,6 @@
 #include <time.h>
 
 long get_hrtime();
-long get_cputime(int who);
+long get_cputime(clockid_t clockid);
 
 #endif

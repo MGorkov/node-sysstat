@@ -4,7 +4,7 @@ const { monitorEventLoopDelay, PerformanceObserver, constants } = require('perf_
 const STATS_INTERVAL = 5;
 const RESOLUTION = 10;
 
-const { CpuLoad } = require('./build/Release/sysstat');
+const { CpuLoad } = require('node-gyp-build')(__dirname);
 const { initStats, statKeys, gcStatKeys } = require('./initstats');
 
 class Stats extends EventEmitter {

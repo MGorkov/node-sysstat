@@ -1,20 +1,18 @@
 {
   "name": "node-sysstat",
-  "version": "1.0.2",
+  "version": "1.1.1",
   "description": "Node system statistic",
   "main": "index.js",
   "dependencies": {
-    "node-addon-api": "^8.0.0",
-    "node-gyp": "^10.1.0"
+    "node-gyp-build": "^4.8.4"
   },
   "devDependencies": {
-    "mocha": "^5.1.1"
+    "node-addon-api": "^8.5.0"
   },
   "scripts": {
-    "install": "node-gyp rebuild",
-    "test": "mocha",
-    "build": "node-gyp rebuild",
-    "clean": "node-gyp clean"
+    "install": "node-gyp-build",
+    "clean": "npx node-gyp clean",
+    "test": "node test"
   },
   "files": [
     "/src",
@@ -26,7 +24,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://git.sbis.ru/explain.sbis.ru/node-sysstat.git"
+    "url": "https://github.com/MGorkov/node-sysstat.git"
   },
   "author": {
     "name": "Maksim Gorkov",

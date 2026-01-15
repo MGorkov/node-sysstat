@@ -1,12 +1,13 @@
 const Sysstat = require('../');
 const STAT_INTERVAL = 5;
-const assert = require('assert');
+const assert = require('node:assert');
 const { statKeys } = require('../initstats');
+const { describe, it } = require('node:test');
 
 const sysstat = new Sysstat({interval: STAT_INTERVAL});
 
 describe('node-sysstat', function() {
-  it('should generate "stats" event', function(done) {
+  it('should generate "stats" event', function(t, done) {
     sysstat.on('stats', (stats) => {
       sysstat.stop();
       done();

@@ -1,0 +1,97 @@
+name: Prebuild
+
+on:
+  push:
+    branches:
+      - test
+  pull_request:
+
+jobs:
+  prebuild:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            platform: linux
+            arch: x64
+          - os: ubuntu-24.04-arm
+            platform: linux
+            arch: arm64
+          - os: macos-15-intel
+            platform: darwin
+            arch: x64
+          - os: macos-15
+            platform: darwin
+            arch: arm64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+
+      - name: Build prebuilds
+        run: |
+          npx prebuildify --napi --arch ${{ matrix.arch }} --platform ${{ matrix.platform }}
+
+      - name: Test prebuilds
+        run: |
+          npm test
+
+      - name: Upload prebuilds
+        uses: actions/upload-artifact@v4
+        with:
+          name: prebuilds-${{ matrix.platform }}-${{ matrix.arch }}
+          path: prebuilds/*
+
+  update-repo:
+    needs: prebuild
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download all prebuilds
+        uses: actions/download-artifact@v4
+        with:
+          path: temp-prebuilds
+
+      - name: Reorganize prebuilds structure
+        run: |
+          mkdir -p prebuilds
+          echo "Processing downloaded artifacts..."
+          for dir in temp-prebuilds/*/*; do
+            echo "Processing $dir"
+            if [ -d "$dir" ]; then
+              # Извлекаем platform и arch из имени директории
+              platform_arch=$(basename "$dir")
+              echo "Platform-Arch: $platform_arch"
+              mkdir -p "prebuilds/$platform_arch"
+              cp "$dir"/* "prebuilds/$platform_arch/" 2>/dev/null || echo "No files to copy from $dir"
+              echo "Copied to prebuilds/$platform_arch/"
+            fi
+          done
+          rm -rf temp-prebuilds
+
+      - name: Commit and push prebuilds
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add prebuilds/
+          if ! git diff --staged --quiet; then
+            git commit -m "Update prebuilds [skip ci]"
+            git push
+          else
+            echo "No changes to commit"
+          fi

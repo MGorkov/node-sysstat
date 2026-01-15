@@ -1,6 +1,5 @@
 #include "utils.h"
 
-constexpr double MICROS_PER_SEC = 1e6;
 constexpr double NANOS_PER_SEC = 1e9;
 
 long get_hrtime() {
@@ -13,13 +12,11 @@ long get_hrtime() {
   }
 }
 
-long get_cputime(int who) {
-  struct rusage stats;
+long get_cputime(clockid_t clockid) {
+  struct timespec stats;
 
-  if (getrusage(who, &stats) == 0) {
-    long user_cpu = stats.ru_utime.tv_sec * MICROS_PER_SEC + stats.ru_utime.tv_usec;
-    long kernel_cpu = stats.ru_stime.tv_sec * MICROS_PER_SEC + stats.ru_stime.tv_usec;
-    return user_cpu + kernel_cpu;
+  if (clock_gettime(clockid, &stats) == 0) {
+    return stats.tv_sec * NANOS_PER_SEC + stats.tv_nsec;
   } else {
     return 0;
   }
