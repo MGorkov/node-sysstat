@@ -1,6 +1,6 @@
 {
   "name": "node-sysstat",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Node system statistic",
   "main": "index.js",
   "dependencies": {
